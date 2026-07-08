@@ -1,0 +1,140 @@
+GNU AFFERO GENERAL PUBLIC LICENSE EXCEPTION
+
+Version 3, 19 November 2007
+Copyright © 2007 Free Software Foundation, Inc. https://fsf.org/
+
+Contribution Relicensing Exception
+
+Version 1, 04 July 2026
+Copyright © 2026 Schroedinger Entertainment https://github.com/SchroedingerEntertainment/
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+This Exception constitutes an additional permission under Section 7 of the GNU Affero General Public License version 3 ("AGPLv3"). It applies to every part of this Project that bears a notice stating that it is licensed under the AGPL together with this Exception.
+
+---
+
+Exception Intent
+
+The purpose of this Exception is to preserve the openness of the Project while allowing official distributions to meet a broader range of practical and commercial requirements.
+
+The Project itself shall remain licensed under the GNU Affero General Public License ("AGPL"). However, certain Official Distributions may be released under alternative licensing terms when doing so improves interoperability, adoption, integration into larger software ecosystems, or enables organizations to build products and services without imposing unnecessary licensing obligations on their own independently developed software.
+
+This Exception is intended primarily to support software vendors, engine developers, middleware providers, tool creators, research institutions, commercial studios, and similar organizations that wish to build upon the Project while retaining the freedom to license their own original work independently.
+
+To ensure transparency for contributors and users alike, every relicensing performed under this Exception must be explicitly documented through an Official Relicensing Notice issued by the Head-Maintainer. Unless such a Notice accompanies an Official Distribution, every part of the Project remains licensed exclusively under the AGPL together with this Exception.
+
+Nothing in this Exception shall be interpreted as reducing the rights granted by the AGPL to the Project itself, nor as transferring ownership of any Contribution. Contributors retain full copyright to their work while granting the additional rights described herein.
+
+---
+
+0. Definitions
+
+For the purposes of this Exception:
+
+Project means the complete software project, including its source code, documentation, assets, tooling, SDKs, runtime libraries, packages, build infrastructure and any other material maintained as part of the official repository.
+
+Contribution means any source code, documentation, assets, tests, bug fixes, features, examples or other material intentionally submitted for inclusion into the Project.
+
+Official Distribution means any source release, binary release, package, SDK, runtime, library, engine host, framework component, build, installer or other distribution officially published by the Head-Maintainer.
+
+Head-Maintainer means the individual or legal entity designated as the primary steward of the Project and authorized to publish Official Distributions and Official Relicensing Notices.
+
+Official Relicensing Notice means a written document issued by the Head-Maintainer that authorizes the relicensing of a specific Official Distribution in accordance with this Exception.
+
+Open Source License means any software license that conforms to the Open Source Definition (OSD) as maintained by the Open Source Initiative (OSI).
+
+---
+
+1. Copyright Ownership
+
+Each Contributor retains ownership of the copyright to their individual Contributions.
+
+Nothing contained in this Exception transfers or assigns ownership of any copyright to the Head-Maintainer or to any other Contributor.
+
+---
+
+2. Additional Rights Granted by Contributors
+
+By intentionally submitting a Contribution for inclusion into the Project, each Contributor grants the Head-Maintainer a perpetual, worldwide, non-exclusive, irrevocable, royalty-free license to use,modify, reproduce, combine, distribute, sublicense and relicense that Contribution solely as part of an Official Distribution of the Project.
+
+These additional rights exist alongside the rights granted under the AGPL and do not affect the Contributor's ownership of their work.
+
+---
+
+3. Official Distribution Relicensing
+
+The Head-Maintainer may, at their sole discretion, distribute any Official Distribution under an Open Source License different from that governing the Project as a whole. For the purposes of this Exception, the replacement license shall conform to the Open Source Definition (OSD).
+
+Such relicensing may apply to an entire Official Distribution or only to specifically identified components contained therein.
+
+The licensing terms selected for one Official Distribution shall not automatically apply to any other release, package, build, branch, fork, component or version of the Project unless explicitly stated.
+
+---
+
+4. Official Relicensing Notice
+
+Every relicensed Official Distribution shall be accompanied by an Official Relicensing Notice issued by the Head-Maintainer.
+
+The Official Relicensing Notice shall include, at minimum:
+
+- a unique identifier for the Notice;
+- the affected Official Distribution;
+- the applicable Project version, release, build identifier, tag or commit;
+- the components covered by the relicensing;
+- the replacement license;
+- confirmation that the replacement license conformed to the Open Source Definition (OSD) as maintained by the Open Source Initiative (OSI) at the time the Official Relicensing Notice was issued;
+- a reference to the corresponding AGPL-licensed source code;
+- the effective date of the relicensing; and
+- a digital signature issued by the Head-Maintainer.
+
+A relicensing shall be considered valid only when accompanied by a valid Official Relicensing Notice.
+
+---
+
+5. Scope of Relicensing
+
+An Official Relicensing Notice applies only to the Official Distribution explicitly identified therein.
+Unless expressly stated within the Notice, the relicensing shall not extend to:
+
+- previous releases;
+- future releases;
+- development branches;
+- forks;
+- derivative distributions; or
+- any other Project component.
+
+---
+
+6. No Implied Relicensing
+
+Relicensing shall never be presumed or inferred.
+
+Unless expressly identified by a valid Official Relicensing Notice, every version, release, build, package, SDK, library, engine host, framework component and other part of the Project shall remain licensed exclusively under the GNU Affero General Public License together with this Exception.
+
+---
+
+7. No Obligation
+
+Nothing contained in this Exception obligates the Head-Maintainer to publish any Official Distribution under licensing terms different from those of the Project.
+
+The decision to relicense an Official Distribution remains entirely at the discretion of the Head-Maintainer.
+
+---
+
+8. Irrevocability
+
+The rights granted by Contributors under this Exception are perpetual and irrevocable with respect to every Contribution already accepted into the Project.
+
+Withdrawal from the Project or termination of participation shall not revoke these rights.
+
+---
+
+9. Acceptance
+
+By intentionally submitting a Contribution for inclusion into the Project, the Contributor acknowledges that they have read and understood this Exception and agree to be bound by its terms.
+
+The Contribution shall thereafter be governed by the AGPL together with this Exception.
+
+---
+
+If you do not wish to grant these permissions, remove this Exception from your Contribution."
