@@ -1,0 +1,9 @@
+[submodule "Packges/Core"]
+	path = Packges/Core
+	url = https://github.com/SchroedingerEntertainment/hamper-core
+[submodule "Tools/Build"]
+	path = Tools/Build
+	url = https://github.com/SchroedingerEntertainment/hamper-build
+[submodule "Tools/Parcel"]
+	path = Tools/Parcel
+	url = https://github.com/SchroedingerEntertainment/Parcel
