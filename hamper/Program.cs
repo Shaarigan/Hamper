@@ -1,7 +1,6 @@
 // Licensed to Schroedinger Entertainment (SOE) under the terms of the AGPLv3
 // Licensed to you by SOE under the terms of the AGPLv3 or another OSI-approved license
 
-using System.IO.Compression;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Soe.Runtime;
@@ -47,7 +46,7 @@ namespace Soe.Hamper
         public static int Main(string[] args)
         {
             ParamSource parameter = new ParamSource(args);
-            using (CommandReader<ParamSource> reader = new CommandReader<ParamSource>(parameter, CommandReaderOptions.AllowVerbValues | CommandReaderOptions.IgnoreCase | CommandReaderOptions.IgnoreMatch))
+            using (CommandReader<ParamSource> reader = new CommandReader<ParamSource>(parameter, CommandReaderOptions.AllowVerbValues | CommandReaderOptions.IgnoreCase))
             {
                 if (reader.Read(GetOptions().AsSpan()))
                 {
@@ -55,30 +54,62 @@ namespace Soe.Hamper
                     {
                         case CommandToken.Verb: return RunModule(reader.Fragment.RawValue.ToLowerInvariant(), ref parameter);
                         case CommandToken.Command: return ProcessFlags(reader);
+                        case CommandToken.Unknown:
+                            {
+                                Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "Unknown command '{0}' found", reader.Fragment.Name);
+                                Console.WriteLine();
+                            }
+                            break;
                     }
                 }
             }
 
             ShowManPage();
-            return 0;
+            return Application.ExitCode;
         }
         
         static int RunModule(string moduleName, ref ParamSource parameter)
         {
-            throw new NotImplementedException();
+            ModuleHost.Initialize();
+            if (ModuleHost.Find(moduleName, out ModuleHost.RuntimeModule module))
+            {
+                if (module.Context.IsMainModule)
+                {
+                    module.Context.Load();
+                    module.Context.Run(ref parameter);
+                    module.Context.Unload();
+                }
+                else Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "No entry point found for module '{0}'", moduleName);
+            }
+            else
+            {
+                // TODO Load module from disk
+                Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "Module '{0}' not found", moduleName);
+            }
+            return Application.ExitCode;
         }
 
         static int ProcessFlags(CommandReader<ParamSource> reader)
         {
-            ShowManPage();
-            return 0;
+            switch (reader.Fragment.Name)
+            {
+                case "help":
+                    {
+                        ShowManPage();
+                    }
+                    break;
+            }
+            return Application.ExitCode;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void ShowManPage()
         {
-            Span<Option> options = GetOptions().AsSpan();
-            Console.Write("hamper [module] ");
-            Console.Write(InfoBuilder.Generate(options, headerPostfix: "[<args>]", terminalWidth: Console.WindowWidth));
+            if(Application.ExitCode == 0)
+            {
+                Console.Write("hamper [module] ");
+            }
+            Console.Write(InfoBuilder.Generate(GetOptions().AsSpan(), header: (Application.ExitCode == 0), headerPostfix: "[<args>]", terminalWidth: Console.WindowWidth));
         }
     }
 }
