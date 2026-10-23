@@ -25,6 +25,9 @@ namespace Soe.Hamper
             }
         }
 
+        /// <summary>
+        /// Declares available command line options
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static AvailableOptions GetOptions()
         {
@@ -68,6 +71,9 @@ namespace Soe.Hamper
             return Application.ExitCode;
         }
         
+        /// <summary>
+        /// Attempts to execute the chosen module
+        /// </summary>
         static int RunModule(string moduleName, ref ParamSource parameter)
         {
             ModuleHost.Initialize();
@@ -76,7 +82,7 @@ namespace Soe.Hamper
                 if (module.Context.IsMainModule)
                 {
                     module.Context.Load();
-                    module.Context.Run(ref parameter);
+                    Application.ExitCode = module.Context.Run(ref parameter);
                     module.Context.Unload();
                 }
                 else Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "No entry point found for module '{0}'", moduleName);
@@ -89,6 +95,9 @@ namespace Soe.Hamper
             return Application.ExitCode;
         }
 
+        /// <summary>
+        /// Performs actions based on the option read
+        /// </summary>
         static int ProcessFlags(CommandReader<ParamSource> reader)
         {
             switch (reader.Fragment.Name)
@@ -102,6 +111,9 @@ namespace Soe.Hamper
             return Application.ExitCode;
         }
 
+        /// <summary>
+        /// Displays the usage manual to the user
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void ShowManPage()
         {
