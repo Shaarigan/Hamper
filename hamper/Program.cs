@@ -48,18 +48,21 @@ namespace Soe.Hamper
         /// <returns>The exit code of the current run</returns>
         public static int Main(string[] args)
         {
-            ParamSource parameter = new ParamSource(args);
-            using (CommandReader<ParamSource> reader = new CommandReader<ParamSource>(parameter, CommandReaderOptions.AllowVerbValues | CommandReaderOptions.IgnoreCase))
+            using (CommandReader<ParamSource> reader = new CommandReader<ParamSource>(new ParamSource(args), CommandReaderOptions.AllowVerbValues | CommandReaderOptions.IgnoreCase))
             {
                 if (reader.Read(GetOptions().AsSpan()))
                 {
                     switch (reader.Fragment.Type)
                     {
-                        case CommandToken.Verb: return RunModule(reader.Fragment.RawValue.ToLowerInvariant(), ref parameter);
+                        case CommandToken.Verb:
+                            {
+                                ParamSource source = reader.StreamSource;
+                                return RunModule(reader.Fragment.RawValue.ToString(), ref source);
+                            }
                         case CommandToken.Command: return ProcessFlags(reader);
                         case CommandToken.Unknown:
                             {
-                                Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "Unknown command '{0}' found", reader.Fragment.Name);
+                                Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "Unknown command '{0}' found", reader.Fragment.Name.ToString());
                                 Console.WriteLine();
                             }
                             break;
@@ -100,14 +103,13 @@ namespace Soe.Hamper
         /// </summary>
         static int ProcessFlags(CommandReader<ParamSource> reader)
         {
-            switch (reader.Fragment.Name)
+            #region --help
+            if(reader.Fragment.Name.Equals("help"))
             {
-                case "help":
-                    {
-                        ShowManPage();
-                    }
-                    break;
+                ShowManPage();
             }
+            #endregion
+            
             return Application.ExitCode;
         }
 
