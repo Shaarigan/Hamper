@@ -57,7 +57,7 @@ namespace Soe.Hamper
                         case CommandToken.Verb:
                             {
                                 ParamSource source = reader.StreamSource;
-                                return RunModule(reader.Fragment.RawValue.ToString(), ref source);
+                                return RunModule(reader.Fragment.Value.ToString(), ref source);
                             }
                         case CommandToken.Command: return ProcessFlags(reader);
                         case CommandToken.Unknown:
