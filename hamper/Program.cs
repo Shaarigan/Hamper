@@ -62,7 +62,7 @@ namespace Soe.Hamper
                         case CommandToken.Command: return ProcessFlags(reader);
                         case CommandToken.Unknown:
                             {
-                                Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "Unknown command '{0}' found", reader.Fragment.Name.ToString());
+                                Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "Unknown command '{0}' found", reader.Fragment.Key.ToString());
                                 Console.WriteLine();
                             }
                             break;
@@ -85,7 +85,37 @@ namespace Soe.Hamper
                 if (module.Context.IsMainModule)
                 {
                     module.Context.Load();
+                    #region Load Submodules
+                    foreach(SubmoduleAttribute submodule in ModuleHost.GetSubmodules(in module))
+                    {
+                        try
+                        {
+                            submodule.Load();
+                        }
+                        catch (Exception e)
+                        {
+                            Application.Log(VerbosityFlags.Warning, SeverityFlags.Full, string.Concat("Submodule failed with error: ", e.Message));
+                        }
+                    }
+                    #endregion
+                    
                     Application.ExitCode = module.Context.Run(ref parameter);
+                    
+                    #region Unload Submodules
+                    foreach(SubmoduleAttribute submodule in ModuleHost.GetSubmodules(in module))
+                    {
+                        // ReSharper disable EmptyGeneralCatchClause
+                        
+                        try
+                        {
+                            submodule.Unload();
+                        }
+                        catch (Exception e)
+                        { }
+                        
+                        // ReSharper restore EmptyGeneralCatchClause
+                    }
+                    #endregion
                     module.Context.Unload();
                 }
                 else Application.Log(VerbosityFlags.Error, SeverityFlags.Silent, "No entry point found for module '{0}'", moduleName);
@@ -104,7 +134,7 @@ namespace Soe.Hamper
         static int ProcessFlags(CommandReader<ParamSource> reader)
         {
             #region --help
-            if(reader.Fragment.Name.Equals("help"))
+            if(reader.Fragment.Key.Equals("help"))
             {
                 ShowManPage();
             }
