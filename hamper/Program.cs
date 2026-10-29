@@ -105,6 +105,7 @@ namespace Soe.Hamper
                     foreach(SubmoduleAttribute submodule in ModuleHost.GetSubmodules(in module))
                     {
                         // ReSharper disable EmptyGeneralCatchClause
+                        #pragma warning disable CS0168
                         
                         try
                         {
@@ -113,6 +114,7 @@ namespace Soe.Hamper
                         catch (Exception e)
                         { }
                         
+                        #pragma warning restore CS0168
                         // ReSharper restore EmptyGeneralCatchClause
                     }
                     #endregion
